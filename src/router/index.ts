@@ -1,35 +1,32 @@
-import { defineRouter } from '#q-app/wrappers';
-import {
-  createMemoryHistory,
-  createRouter,
-  createWebHashHistory,
-  createWebHistory,
-} from 'vue-router';
-import routes from './routes';
+/* quasar.config.js */
 
-/*
- * If not building with SSR mode, you can
- * directly export the Router instantiation;
- *
- * The function below can be async too; either use
- * async/await or return a Promise which resolves
- * with the Router instance.
- */
+import { configure } from 'quasar/wrappers';
+import { quasar } from '@quasar/vite-plugin';
 
-export default defineRouter(function (/* { store, ssrContext } */) {
-  const createHistory = process.env.SERVER
-    ? createMemoryHistory
-    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory);
+export default configure(function (/* ctx */) {
+  return {
+    // ----- Build -----
+    build: {
+      // สำหรับ GitHub Pages Project Page
+      publicPath: '/channarong-khemaram-318/',
 
-  const Router = createRouter({
-    scrollBehavior: () => ({ left: 0, top: 0 }),
-    routes,
+      // ให้ Vue Router ใช้ Hash Mode → ป้องกันหน้าเว็บขาว
+      vueRouterMode: 'hash',
 
-    // Leave this as is and make changes in quasar.conf.js instead!
-    // quasar.conf.js -> build -> vueRouterMode
-    // quasar.conf.js -> build -> publicPath
-    history: createHistory(process.env.VUE_ROUTER_BASE),
-  });
+      // ตัวอย่างเพิ่มเติม (ถ้ามี)
+      // target: 'es2019',
+      // vueRouterBase: '',
+    },
 
-  return Router;
+    // ----- Plugins -----
+    framework: {
+      config: {},
+      plugins: [],
+    },
+
+    // ----- Vite -----
+    vitePlugins: [
+      quasar(),
+    ],
+  };
 });
