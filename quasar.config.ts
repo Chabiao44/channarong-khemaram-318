@@ -6,7 +6,7 @@ import { defineConfig } from '#q-app/wrappers';
 
 export default defineConfig((/* ctx */) => {
   return {
-    
+
     // https://v2.quasar.dev/quasar-cli-webpack/prefetch-feature
     // preFetch: true,
 
@@ -14,7 +14,7 @@ export default defineConfig((/* ctx */) => {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
     boot: [
-      
+
       'axios',
     ],
 
@@ -96,7 +96,9 @@ export default defineConfig((/* ctx */) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        ['Notify']
+      ]
     },
 
     // animations: 'all', // --- includes all animations
